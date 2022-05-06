@@ -40,5 +40,5 @@ app.use("/purchase",customerRoute);
 
 
 app.listen(port, host, () => {
-    console.log(`Node server is listening on port ${port}`);
+    console.log(`server is listening on port ${port}`);
   });
