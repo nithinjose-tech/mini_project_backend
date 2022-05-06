@@ -19,7 +19,8 @@ exports.createProduct = async(req,res) =>{
          price:req.body.price,
          size:req.body.size,
          tags:req.body.tags,
-         image:req.body.image
+         image:req.body.image,
+         rating:req.body.rating
      }
 
      Products.create(product)
