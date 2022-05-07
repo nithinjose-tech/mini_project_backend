@@ -31,6 +31,8 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+
+
 app.use(bodyParser.json());
 
 app.use("/auth", authRoute);
