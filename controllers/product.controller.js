@@ -1,13 +1,21 @@
 const router = require("express").Router();
 const Products = require("../models/Products");
+let path = require('path');
+
+
+
 
 const jwt = require("jsonwebtoken");
+
+
+
+
 
 //Create Product
 exports.createProduct = async(req,res) =>{
   const vendorObject = JSON.parse(req.data);
   console.log(`Data Field:${req.data}`);
-
+  console.log(`file Field:${req.file.filename}`);
   if(vendorObject.role=="VENDOR")
   {
      const product={
@@ -19,9 +27,11 @@ exports.createProduct = async(req,res) =>{
          price:req.body.price,
          size:req.body.size,
          tags:req.body.tags,
-         image:req.body.image,
+         image:"https://miniproject-backend-n.herokuapp.com/"+req.file.path,
          rating:req.body.rating
      }
+
+     
 
      Products.create(product)
         .then((data) => {
@@ -99,6 +109,9 @@ exports.deleteProduct = async(req,res)=>{
         res.status(403).json("Customers are not allowed to delete the product!");
       }  
 }
+
+var filepath = 'images/f4dec649-2f57-4f38-b50e-b6c2453d3574-1652289630675.png'
+
 
 
 

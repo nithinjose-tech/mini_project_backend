@@ -4,10 +4,12 @@ const mongoose = require("mongoose");
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/products');
 const customerRoute = require('./routes/customer')
+const path = require("path");
 const dotenv = require("dotenv");
 
 const app = express();
 const cors = require("cors");
+
 
 const port = process.env.PORT || 4000;
 const host = "0.0.0.0";
@@ -34,6 +36,9 @@ app.use(cors());
 
 
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "static-public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/auth", authRoute);
 app.use("/products",productRoute);
