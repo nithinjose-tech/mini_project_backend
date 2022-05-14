@@ -2,10 +2,9 @@ const Products = require("../models/Products");
 
 
 exports.diplayProducts= async(req,res) =>{
-     const vendorObject = JSON.parse(req.data);
-     if (vendorObject.role=="CUSTOMER")
-     {
-      await Products.find().then((result)=>{
+   
+     
+      await Products.find(req.query.category?{ category: req.query.category }:{}).then((result)=>{
         res.status(200).send(result)
       }).catch((err)=>{
         res.status(500).send({
@@ -13,14 +12,12 @@ exports.diplayProducts= async(req,res) =>{
             err.message || "Some error occurred while retrieving the product.",
         });
       })
-    }else{
-      res.status(403).json("Only Customers can view all products!");
-    }
+    
 }
 
 exports.purchaseProduct =async(req,res)=>{
         const vendorObject = JSON.parse(req.data);
-        if (vendorObject.role=="CUSTOMER") {
+        
         try {
           await Products.updateOne({_id:req.params.id},{$inc: {stock: -1}}).then((async result=>{
             // res.status(200).json(result);
@@ -32,7 +29,5 @@ exports.purchaseProduct =async(req,res)=>{
         } catch (err) {
           res.status(500).json(err);
         }
-      } else {
-        res.status(403).json("Only Customers can purchase product!");
-      }  
+       
 }
