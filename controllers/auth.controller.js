@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
       req.body.password,
       process.env.SECRET_KEY
     ).toString(),
-    profilePic: req.body.profilePic,
+    profilePic: req.file.path,
     role: req.body.role,
   });
   try {

@@ -27,7 +27,8 @@ exports.createProduct = async(req,res) =>{
          price:req.body.price,
          size:req.body.size,
          tags:req.body.tags,
-         image:"https://miniproject-backend-n.herokuapp.com/"+req.file.path,
+         image:req.file.path,
+         description:req.body.description,
          rating:req.body.rating
      }
 
