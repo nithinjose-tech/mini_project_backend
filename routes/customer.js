@@ -4,6 +4,9 @@ const verifyToken = require("../utils/verifyToken");
 const customerController = require('../controllers/customer.controller');
 
 router.get("/",customerController.diplayProducts)
+router.get("/categories",customerController.viewCategories)
+router.get("/:id",customerController.findProductById)
+
 router.get("/:id",verifyToken,customerController.purchaseProduct)
 
 

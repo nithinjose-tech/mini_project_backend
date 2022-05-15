@@ -15,6 +15,28 @@ exports.diplayProducts= async(req,res) =>{
     
 }
 
+exports.viewCategories=async(req,res)=>{
+   const categoriers = ["Electronics","Pottery","Digital","Paintings","Sculptures","Crokery","Jewellery","Bags"];
+   res.send(categoriers);
+}
+
+
+exports.findProductById = async(req,res) =>{
+        const id = req.params.id;
+
+        await Products.findById(id)
+          .then((data) => {
+            res.send(data);
+          })
+          .catch((err) => {
+            res.status(400).send({
+              message: "Product with given id not found",
+            });
+          });
+ 
+}
+
+
 exports.purchaseProduct =async(req,res)=>{
         const vendorObject = JSON.parse(req.data);
         

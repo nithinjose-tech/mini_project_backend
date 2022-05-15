@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema(
     category: { 
            type: String,
            required: true,
-           enum:["Electronics","Pottery","Digital","Paintings","Sculptures","Crokery","Jewellery"]
+           enum:["Electronics","Pottery","Digital","Paintings","Sculptures","Crokery","Jewellery","Bags"]
           },
     vendor: { type: String, required: true},
     vendor_id: { type: String, required: true},

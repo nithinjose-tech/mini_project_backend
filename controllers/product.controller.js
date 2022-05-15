@@ -126,13 +126,24 @@ var filepath = 'images/f4dec649-2f57-4f38-b50e-b6c2453d3574-1652289630675.png'
 exports.updateProduct= async (req, res) => {
 
     const vendorObject = JSON.parse(req.data);
+    const product={
+      name:req.body.name,
+      category:req.body.category,
+      stock:req.body.stock,
+      price:req.body.price,
+      size:req.body.size,
+      tags:req.body.tags,
+      image:req.file.path,
+      description:req.body.description,
+      rating:req.body.rating
+  }
 
     if (vendorObject.role=="VENDOR") {
       try {
         const updatedProduct = await Products.findByIdAndUpdate(
           req.params.id,
           {
-            $set: req.body,
+            $set: product,
           },
           { new: true }
         );
