@@ -7,7 +7,7 @@ router.get("/",customerController.diplayProducts)
 router.get("/categories",customerController.viewCategories)
 router.get("/:id",customerController.findProductById)
 
-router.get("/:id",verifyToken,customerController.purchaseProduct)
+router.get("/getProduct/:id",verifyToken,customerController.purchaseProduct)
 
 
 module.exports =router;
