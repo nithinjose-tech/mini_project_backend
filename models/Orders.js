@@ -1,31 +1,44 @@
 const mongoose = require("mongoose");
 
+const itemsSchema = new mongoose.Schema({
+  product_id: {
+    type: String,
+    required: true,
+  },
+  quantity:{
+    type:Number,
+    required:true,
+  }
+})
+
 const OrderSchema = new mongoose.Schema(
   {
-  
-    customer_id: { type: String, required: true},
-    orders:[{
-      prodcuct_id : {type:String},
-      time:{ type : Date, default: Date.now },
-      paymentStatus:{type:Boolean},
-    }],
-    // stock: { type: Number, required: true},
-    // price:{type:Number,required:true},
-    // description:{type:String,required:true},
-    // size:{
-    //     type: String,
-    //     required:true,
-    //     enum: ["SM","MD","LG","XL","XXL"],
-    // },
-    // tags: [{
-    //     type: String
-    // }],
-    // image: { type: String,required:true },
-    // rating:{
-    //     type:Number,
-    // },
+    customer_id: { type: String, required: true },
+    items: [
+      itemsSchema
+    ],
+    price: { type: Number },
+    paymentStatus: {
+      type: String,
+      enum: ["PENDING", "SUCCESS", "FAILED"],
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
 module.exports = mongoose.model("Order", OrderSchema);
+
+// const VendorSalesSchema = new mongoose.Schema(
+//   {
+//     vendor_id: { type: String, required: true },
+//     items: [
+//       {
+//         product_id: { type: String },
+//         quantity: { type: Number },
+//         order_id: { type: String, required: true },
+//       },
+//     ],
+//   },
+//   { timestamps: true }
+// );
