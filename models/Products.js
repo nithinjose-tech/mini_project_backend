@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const ProductSchema = new mongoose.Schema(
   {
     name: { type: String, required: true},
-    category: { 
+    category: [{
            type: String,
            required: true,
-           enum:["Electronics","Pottery","Digital","Paintings","Sculptures","Crokery","Jewellery","Bags"]
-          },
+           enum:[,"Pottery","Digital","Paintings","Sculptures","Apparel","Used","Ornaments,Books","Crokery","Antiques","Utensils","Textiles"]
+    }],
     vendor: { type: String, required: true},
     vendor_id: { type: String, required: true},
     stock: { type: Number, required: true},
