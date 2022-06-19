@@ -77,3 +77,16 @@ exports.purchaseProduct =async(req,res)=>{
     }
        
 }
+
+
+exports.viewOrders = async(req,res)=>{
+  const customerObject = JSON.parse(req.data);
+  await Orders.find({ customer_id:customerObject._id }).sort({createdAt: 'desc'}).then((result)=>{
+    res.status(200).send(result)
+  }).catch((err)=>{
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving the product.",
+    });
+  })
+}
