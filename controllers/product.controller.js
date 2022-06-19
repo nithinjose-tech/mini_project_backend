@@ -25,11 +25,10 @@ exports.createProduct = async(req,res) =>{
          vendor_id:vendorObject._id,
          stock:req.body.stock,
          price:req.body.price,
-         size:req.body.size,
          tags:req.body.tags,
          image:req.file.path,
          description:req.body.description,
-         rating:req.body.rating
+         
      }
 
      
