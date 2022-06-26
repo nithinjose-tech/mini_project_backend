@@ -9,7 +9,7 @@ function verify(req, res, next) {
     jwt.verify(token, process.env.SECRET_KEY, async (err, decoded) => {
       if (err) {
         console.log(`Real error:${err}`);
-        res.json({ auth: false, message: "Failed to Authenticated" });
+        res.status(400).json({ auth: false, message: "Failed to Authenticated" });
       } else {
         // console.log("Decided Value");
         // console.log(JSON.stringify(decoded));
