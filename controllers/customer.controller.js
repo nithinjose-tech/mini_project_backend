@@ -50,7 +50,8 @@ exports.purchaseProduct =async(req,res)=>{
               customer_id:customerObject._id,
               items:req.body.items,
               price:req.body.price,
-              paymentStatus:req.body.paymentStatus
+              paymentStatus:req.body.paymentStatus,
+              shipTo:req.body.shipTo
 
           }
 

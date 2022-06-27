@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const itemsSchema = new mongoose.Schema({
+  name:{
+    type: String,
+    required: true,
+  },
   product_id: {
     type: String,
     required: true,
@@ -23,10 +27,7 @@ const itemsSchema = new mongoose.Schema({
     type:Number,
     required:true
   },
-  shipTo:{
-    type:String,
-    required:true,
-  }
+  
 })
 
 const OrderSchema = new mongoose.Schema(
@@ -35,11 +36,16 @@ const OrderSchema = new mongoose.Schema(
     items: [
       itemsSchema
     ],
+   
     price: { type: Number },
     paymentStatus: {
       type: String,
       enum: ["PENDING", "SUCCESS", "FAILED"],
       required: true,
+    },
+    shipTo:{
+      type:String,
+      required:true,
     },
   },
   { timestamps: true }
