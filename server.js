@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/products');
 const customerRoute = require('./routes/customer')
+const customeProductRoute = require('./routes/customProduct')
 const path = require("path");
 const dotenv = require("dotenv");
 
@@ -43,6 +44,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/auth", authRoute);
 app.use("/products",productRoute);
 app.use("/purchase",customerRoute);
+app.use("/custom",customeProductRoute);
 
 
 
