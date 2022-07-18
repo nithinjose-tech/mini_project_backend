@@ -3,8 +3,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/products');
-const customerRoute = require('./routes/customer')
-const customeProductRoute = require('./routes/customProduct')
+const customerRoute = require('./routes/customer');
+const customeProductRoute = require('./routes/customProduct');
+const vendorStatisticRoute = require('./routes/vendorStatics')
 const path = require("path");
 const dotenv = require("dotenv");
 
@@ -45,6 +46,7 @@ app.use("/auth", authRoute);
 app.use("/products",productRoute);
 app.use("/purchase",customerRoute);
 app.use("/custom",customeProductRoute);
+app.use("/statistics",vendorStatisticRoute);
 
 
 

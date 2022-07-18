@@ -1,12 +1,17 @@
 const Products = require("../models/Products");
 const Orders = require("../models/Orders");
+const VendorStatistics = require("../models/VendorStatistics");
 
 
 exports.diplayProducts= async(req,res) =>{
    
+       const category_param = req.query.category?req.query.category:null;                                   
+       const name_param = req.query.category?req.query.category:null;
+
      
-      await Products.find(req.query.category?{ category: req.query.category }:{}).sort({createdAt: 'desc'}).then((result)=>{
-        res.status(200).send(result)
+      
+      await Products.find().where(req.query.category?{ category:{"$regex":req.query.category,"$options": "i"} }:{}).where(req.query.name?{ $or:[{name:{"$regex":req.query.name,"$options": "i"} },{tags:{"$regex":req.query.name,"$options": "i"}}]}:{}).where(req.query.tags?{ tags: req.query.tags }:{}).sort({createdAt: 'desc'}).then((result)=>{
+        res.status(200).send(result)      
       }).catch((err)=>{
         res.status(500).send({
           message:
@@ -56,6 +61,7 @@ exports.purchaseProduct =async(req,res)=>{
           }
 
           console.log(`items:${req.body.items.length}`)
+          
 
           Orders.create(purchase)
           .then((data) => {
@@ -67,6 +73,17 @@ exports.purchaseProduct =async(req,res)=>{
                 err.message || "Some error occurred while creating the product.",
             });
           });
+
+
+          for (let i = 0; i < req.body.items.length; i++) { 
+            // console.log(req.body.items[i].name);
+            VendorStatistics.create({
+              vendor_id:req.body.items[i].vendor_id,
+              product_id:req.body.items[i].product_id,
+              name:req.body.items[i].name,
+              price:req.body.items[i].price
+            })
+          }
           
         } catch (err) {
           res.status(500).json(err);
