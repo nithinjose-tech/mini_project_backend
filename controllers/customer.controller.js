@@ -5,8 +5,6 @@ const VendorStatistics = require("../models/VendorStatistics");
 
 exports.diplayProducts= async(req,res) =>{
    
-       const category_param = req.query.category?req.query.category:null;                                   
-       const name_param = req.query.category?req.query.category:null;
 
      
       
