@@ -47,3 +47,20 @@ exports.findAllCustomProduct = async (req, res) => {
       });
     });
 };
+
+exports.acceptRequest = async(req,res)=>{
+    const vendorObject = JSON.parse(req.data);
+
+    if (vendorObject.role == "VENDOR") {
+      try {
+        await customProducts.findByIdAndUpdate(req.params.id,{status:"ACCEPT"},{ new: true }).then((result) => {
+          res.status(200).json(result);
+        });
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(403).json("Customers are not allowed to access this functionality!");
+    }
+
+}
