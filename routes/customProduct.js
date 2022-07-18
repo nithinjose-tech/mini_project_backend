@@ -13,6 +13,6 @@ router.post("/request",verifyToken,upload.single("customPic"),customProductContr
 
 router.get("/viewRequest",verifyToken,customProductController.findAllCustomProduct)
 
-router.post("/acceptRequest/:id",verifyToken,customProductController.acceptRequest)
+router.post("/updateStatus/:id",verifyToken,customProductController.updateRequestStatus)
 
 module.exports = router
