@@ -11,6 +11,7 @@ const CustomProductsSchema = new mongoose.Schema(
     quantity: { type: Number, required: true },
     minPrice: { type: Number, required: true },
     maxPrice: { type: Number, required: true },
+    status:{type:String,enum: ["PENDING","ACCEPT","REJECT"],default:"PENDING"},
   },
   { timestamps: true }
 );
