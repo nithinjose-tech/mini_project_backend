@@ -77,13 +77,18 @@ exports.purchaseProduct =async(req,res)=>{
 
           for (let i = 0; i < req.body.items.length; i++) { 
             // console.log(req.body.items[i].name);
-            VendorStatistics.create({
-              vendor_id:req.body.items[i].vendor_id,
-              product_id:req.body.items[i].product_id,
-              name:req.body.items[i].name,
-              price:req.body.items[i].price,
-              quantity:req.body.items[i].quantity
-            })
+            Promise.all([
+              VendorStatistics.create({
+                vendor_id:req.body.items[i].vendor_id,
+                product_id:req.body.items[i].product_id,
+                name:req.body.items[i].name,
+                price:req.body.items[i].price,
+                quantity:req.body.items[i].quantity
+              }),
+              Products.findOneAndUpdate({_id :req.body.items[i].product_id}, {$inc : {'stock' : -1}})
+
+            ])
+            
           }
           
         } catch (err) {
