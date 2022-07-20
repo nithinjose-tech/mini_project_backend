@@ -40,8 +40,65 @@ exports.findStatistics = async(req,res) =>{
 
     Promise.all([
       VendorStatistics.find({ vendor_id:vendorId}).where({createdAt: {$gte:start, $lte:end}}),
-      Products.find({ vendor_id: vendorId })
-    ]).then( ([ sale, product ]) => {
+      Products.find({ vendor_id: vendorId }),
+      VendorStatistics.aggregate([{
+        $match: {
+          vendor_id:vendorId
+        },
+      },{
+        $project : {
+            year : {
+                $year : "$createdAt"
+            },
+            month : {
+                $month : "$createdAt"
+            },
+            week : {
+                $week : "$createdAt"
+            },
+            day : {
+                $dayOfWeek : "$createdAt"
+            },
+            _id : 1,
+            price : 1
+        }
+    }, {
+        $group : {
+            _id : {
+                year : "$year",
+                month : "$month",
+                week : "$week",
+                day : "$day"
+            },
+            totalWeightDaily : {
+                $sum : "$price"
+            }
+        }
+    },
+    {
+        $group : {
+
+            _id : {
+                year : "$_id.year",
+                month : "$_id.month",
+                week : "$_id.week"
+            },
+            totalWeightWeekly : {
+                $sum : "$totalWeightDaily"
+            },
+            totalWeightDay : {
+                $push : {
+                    totalWeightDay : "$totalWeightDaily",
+                    dayOfWeek : "$_id.day"
+                }
+            }
+        },
+        
+
+        
+    }
+])
+    ]).then( ([ sale, product ,per]) => {
 
           const saleCount = sale.length;
           const productCount = product.length
@@ -69,12 +126,14 @@ exports.findStatistics = async(req,res) =>{
              saleCount:saleCount,
              saleAggregate:saleAggregate,
              productCount:productCount,
-             productAggregate:productAggregate
+             productAggregate:productAggregate,
+             perDay:per
 
 
 
         }
                 res.send(ultData)
+                // res.send(per)
 
 
           
