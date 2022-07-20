@@ -20,7 +20,7 @@ exports.diplayProducts= async(req,res) =>{
 }
 
 exports.viewCategories=async(req,res)=>{
-   const categoriers = ["Pottery","Digital","Paintings","Sculptures","Apparel","Used","Ornaments,Books","Crockery","Antiques","Utensils","Textiles"];
+   const categoriers = ["Pottery","Digital","Paintings","Sculptures","Apparel","Used","Ornaments","Books","Crockery","Antiques","Utensils","Textiles"];
    res.send(categoriers);
 }
 
