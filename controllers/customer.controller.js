@@ -20,7 +20,7 @@ exports.diplayProducts= async(req,res) =>{
 }
 
 exports.viewCategories=async(req,res)=>{
-   const categoriers = ["Electronics","Pottery","Digital","Paintings","Sculptures","Crokery","Jewellery","Bags"];
+   const categoriers = ["Pottery","Digital","Paintings","Sculptures","Apparel","Used","Ornaments,Books","Crockery","Antiques","Utensils","Textiles"];
    res.send(categoriers);
 }
 
@@ -85,7 +85,7 @@ exports.purchaseProduct =async(req,res)=>{
                 price:req.body.items[i].price,
                 quantity:req.body.items[i].quantity
               }),
-              Products.findOneAndUpdate({_id :req.body.items[i].product_id}, {$inc : {'stock' : -1}})
+              Products.findOneAndUpdate({_id :req.body.items[i].product_id}, {$inc : {'stock' : quantity*-1}})
 
             ])
             
