@@ -27,7 +27,7 @@ exports.diplayProducts = async (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving the product.",
+          err.message || "Some error occurred during retrieving the product.",
       });
     });
 };
@@ -103,7 +103,7 @@ exports.purchaseProduct = async (req, res) => {
           }),
           Products.findOneAndUpdate(
             { _id: req.body.items[i].product_id },
-            { $inc: { stock: req.body.items[i].quantity * -1 } }
+            { $inc: { stock: quantity * -1 } }
           ),
         ]);
       }
