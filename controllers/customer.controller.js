@@ -104,7 +104,7 @@ exports.purchaseProduct = async (req, res) => {
           }),
           Products.findOneAndUpdate(
             { _id: req.body.items[i].product_id },
-            { $inc: { stock: quantity * -1 } }
+            { $inc: { stock: req.body.items[i].quantity * -1 } }
           ),
         ]);
       }
