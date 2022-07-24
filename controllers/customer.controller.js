@@ -27,7 +27,7 @@ exports.diplayProducts = async (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred during retrieving the product.",
+          err.message || "Some error occurred while retrieving the product.",
       });
     });
 };
