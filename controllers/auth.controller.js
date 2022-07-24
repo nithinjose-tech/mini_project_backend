@@ -14,9 +14,13 @@ exports.register = async (req, res) => {
       userData.password,
       process.env.SECRET_KEY
     ).toString(),
-    profilePic: req.file.path,
+    // profilePic: req.file.path,
     role: userData.role,
   });
+  if (req.file) {
+    newUser = { profilePic: req.file.path, ...newUser };
+  }
+  
   try {
     const user = await newUser.save();
     res.status(201).json(user);
