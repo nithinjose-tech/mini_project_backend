@@ -15,6 +15,7 @@ exports.diplayProducts = async (req, res) => {
             $or: [
               { name: { $regex: req.query.name, $options: "i" } },
               { tags: { $regex: req.query.name, $options: "i" } },
+              {category:{$regex: req.query.name, $options: "i"}}
             ],
           }
         : {}
