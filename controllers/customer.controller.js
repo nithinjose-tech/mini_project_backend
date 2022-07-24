@@ -87,7 +87,7 @@ exports.purchaseProduct = async (req, res) => {
         .catch((err) => {
           res.status(500).send({
             message:
-              err.message || "Some error occurred while creating the product.",
+              err.message || "Some error occurred during creating the product.",
           });
         });
 
