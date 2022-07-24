@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   const userData = JSON.parse(req.body.userData);
   console.log(userData)
-  const newUser = new Users({
+  var newUser = new Users({
     username: userData.username,
     fullname: userData.fullname,
     email: userData.email,
