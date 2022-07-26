@@ -48,6 +48,7 @@ exports.viewCategories = async (req, res) => {
     "Wood Crafts",
     "Paper Crafts",
     "Ornaments",
+    "Digital"
   ];
   res.send(categoriers);
 };

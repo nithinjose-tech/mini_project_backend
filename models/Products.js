@@ -21,6 +21,7 @@ const ProductSchema = new mongoose.Schema(
           "Wood Crafts",
           "Paper Crafts",
           "Ornaments",
+          "Digital"
         ],
       },
     ],
